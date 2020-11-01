@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Joshua\\source\\repos\\LFSR-SadConsole\\LFSR-SadConsole\\LFSR-SadConsole.csproj": {}
+    "C:\\Users\\Joshua\\source\\repos\\LFSR\\LFSR-SadConsole\\LFSR-SadConsole.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Joshua\\source\\repos\\LFSR-SadConsole\\LFSR-SadConsole\\LFSR-SadConsole.csproj": {
+    "C:\\Users\\Joshua\\source\\repos\\LFSR\\LFSR-SadConsole\\LFSR-SadConsole.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Joshua\\source\\repos\\LFSR-SadConsole\\LFSR-SadConsole\\LFSR-SadConsole.csproj",
+        "projectUniqueName": "C:\\Users\\Joshua\\source\\repos\\LFSR\\LFSR-SadConsole\\LFSR-SadConsole.csproj",
         "projectName": "LFSR-SadConsole",
-        "projectPath": "C:\\Users\\Joshua\\source\\repos\\LFSR-SadConsole\\LFSR-SadConsole\\LFSR-SadConsole.csproj",
+        "projectPath": "C:\\Users\\Joshua\\source\\repos\\LFSR\\LFSR-SadConsole\\LFSR-SadConsole.csproj",
         "packagesPath": "C:\\Users\\Joshua\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Joshua\\source\\repos\\LFSR-SadConsole\\LFSR-SadConsole\\obj\\",
+        "outputPath": "C:\\Users\\Joshua\\source\\repos\\LFSR\\LFSR-SadConsole\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Joshua\\AppData\\Roaming\\NuGet\\NuGet.Config",
