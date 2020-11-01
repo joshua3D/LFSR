@@ -101,9 +101,9 @@ namespace LFSR_SadConsole
             {
                 Shift();
 
-                if (_x >= 0 && _x <= _width)
+                if (_x >= 0 && _x < _width)
                 {
-                    if (_y >= 0 && _y <= _height)
+                    if (_y >= 0 && _y < _height)
                     {
                         _cycles += 1;
                         break;
