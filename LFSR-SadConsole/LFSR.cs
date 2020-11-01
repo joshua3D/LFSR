@@ -29,48 +29,7 @@ namespace LFSR_SadConsole
             _height = (uint)height;
             _dimension = _width * _height;
         }
-        public void Reset() 
-        {
-            _randomValue = INIT_BYTE;
-            _cycles = default;
-            _x = default;
-            _y = default;
-        }
-        public ValueTuple<(uint, uint)> Next()
-        {
-            SyncNext();
-
-            return ValueTuple.Create<(uint, uint)>((_x, _y));
-        }
-        public async Task<ValueTuple<(uint, uint)>> AwaitNext() 
-        {
-            await AsyncNext();
-
-            return ValueTuple.Create<(uint, uint)>((_x, _y));
-        }
-        private void Shift()
-        {
-            // Y = low 8 bits, 0 - 255 (i.e, 0000 0000 1111 1111)
-            _y = (_randomValue & LOW_BYTE);
-
-            // X = high 9 bits, 0 - 511 (i.e, 0000 0001 1111 1111) ~ after shift (>> 8)
-            _x = ((_randomValue & HIGH_BYTE) >> 8);
-
-            // get output bit
-            uint lsb = _randomValue & 1;
-
-            // shift register
-            _randomValue >>= 1;
-
-            // xor soup
-            if (lsb != 0)
-                _randomValue ^= SOUP_BYTE;
-
-            _value = ValueTuple.Create<(uint, uint)>((_x, _y));
-
-            return;
-        }
-        private void SyncNext()
+        public void Next()
         {
             uint i = default;
 
@@ -93,7 +52,7 @@ namespace LFSR_SadConsole
                 }
             }
         }
-        private async Task AsyncNext() 
+        public async Task AsyncNext()
         {
             uint i = default;
 
@@ -117,6 +76,35 @@ namespace LFSR_SadConsole
             }
 
             await Task.CompletedTask;
-        }      
+        }
+        public void Reset() 
+        {
+            _randomValue = INIT_BYTE;
+            _cycles = default;
+            _x = default;
+            _y = default;
+        }
+        private void Shift()
+        {
+            // Y = low 8 bits, 0 - 255 (i.e, 0000 0000 1111 1111)
+            _y = (_randomValue & LOW_BYTE);
+
+            // X = high 9 bits, 0 - 511 (i.e, 0000 0001 1111 1111) ~ after shift (>> 8)
+            _x = ((_randomValue & HIGH_BYTE) >> 8);
+
+            // get output bit
+            uint lsb = _randomValue & 1;
+
+            // shift register
+            _randomValue >>= 1;
+
+            // xor soup
+            if (lsb != 0)
+                _randomValue ^= SOUP_BYTE;
+
+            _value = ValueTuple.Create<(uint, uint)>((_x, _y));
+
+            return;
+        }
     }
 }
