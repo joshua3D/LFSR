@@ -11,14 +11,23 @@ SadConsole.Console console = new SadConsole.Console(width, height);
 
 LFSR lfsr = new LFSR(console.Width, console.Height);
 
-// the lfsr starts out with a value, coordinate (0,0);
-(uint, uint) startingCoordinate = lfsr.Value;
+// the lfsr always begins with the Coords value (0,0);
+Coords startingCoordinate = lfsr.Value;
 
 // we create the next value (within our width/height domain) by using Next
 lfsr.Next();
 
 // we don't create and get in the same step, to avoid confusion
-(uint, uint) nextCoordinate = lfsr.Value;
+Coords nextCoordinate = lfsr.Value;
+
+// we know the LFSR has generated every possible value for our domain when Finished returns true
+if(lfsr.Finished) 
+{
+ // OnFinish();
+}
+
+// When that happens, we can either create a new LFSR or just hit Reset
+lfsr.Reset();
 ```
 
 [A demonstration of the LFSR generating 1,200 cells](https://youtu.be/77TmBRx6myM)
@@ -26,11 +35,11 @@ lfsr.Next();
 ## Why use FizzleFade and not an RNG?
 
 1. Every coordinate is generated only once by the algorithm
-2. Every coordinate generated is stored in a ValueTuple
-2. Every coordinate is distributed evenly across the domain
+2. Every coordinate generated replaces the old one, and is stored in a struct, 'Coords'
+2. Every coordinate is distributed evenly across the domain of possible values
 3. The algorithm is 100% deterministic
 4. No collection is used (e.g., no lists, arrays, or hashmaps)
-6. Resetting the LFSR has little to no overhead
+6. Resetting the LFSR has very little overhead
 
 ## Where did the FizzleFade come from?
 [To learn more, I recommend this wonderful article on the use of FizzleFade in Wolfenstein3D](https://fabiensanglard.net/fizzlefade/index.php)
