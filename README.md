@@ -25,6 +25,9 @@ if(lfsr.Finished)
 {
  // OnFinish();
 }
+
+// When that happens, we can either create a new LFSR or just hit Reset
+lfsr.Reset();
 ```
 
 [A demonstration of the LFSR generating 1,200 cells](https://youtu.be/77TmBRx6myM)
