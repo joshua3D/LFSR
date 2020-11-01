@@ -11,14 +11,14 @@ SadConsole.Console console = new SadConsole.Console(width, height);
 
 LFSR lfsr = new LFSR(console.Width, console.Height);
 
-// the lfsr starts out with a value, coordinate (0,0);
-(uint, uint) startingCoordinate = lfsr.Value;
+// the lfsr always begins with the Coords value (0,0);
+Coords startingCoordinate = lfsr.Value;
 
 // we create the next value (within our width/height domain) by using Next
 lfsr.Next();
 
 // we don't create and get in the same step, to avoid confusion
-(uint, uint) nextCoordinate = lfsr.Value;
+Coords nextCoordinate = lfsr.Value;
 ```
 
 [A demonstration of the LFSR generating 1,200 cells](https://youtu.be/77TmBRx6myM)
@@ -26,7 +26,7 @@ lfsr.Next();
 ## Why use FizzleFade and not an RNG?
 
 1. Every coordinate is generated only once by the algorithm
-2. Every coordinate generated is stored in a ValueTuple
+2. Every coordinate generated is stored in a struct, 'Coords'
 2. Every coordinate is distributed evenly across the domain
 3. The algorithm is 100% deterministic
 4. No collection is used (e.g., no lists, arrays, or hashmaps)
