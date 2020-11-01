@@ -6,22 +6,24 @@ namespace LFSR_SadConsole
 {
     public class LFSR
     {
-        const uint VALUE_RANGE = 131072;
-        const uint LOW_BYTE = 255;
-        const uint HIGH_BYTE = 130816;
-        const uint SOUP_BYTE = 73728;
-        
-        uint _x = default;
-        uint _y = default;
-        uint _cycles = 0;
-        uint _randomValue = 1;
+        private const uint VALUE_RANGE = 131072;
+        private const uint LOW_BYTE = 255;
+        private const uint HIGH_BYTE = 130816;
+        private const uint SOUP_BYTE = 73728;
+        private const uint INIT_BYTE = 1;
 
-        readonly uint _width;
-        readonly uint _height;
-        readonly uint _dimension;
+        private uint _randomValue = INIT_BYTE;
+        private uint _cycles = default;
+        private uint _x = default;
+        private uint _y = default;
+        private ValueTuple<(uint, uint)> _value;
+
+        private readonly uint _width;
+        private readonly uint _height;
+        private readonly uint _dimension;
 
         public bool Finished => _cycles >= _dimension;
-        public ValueTuple<(uint, uint)> Value => ValueTuple.Create<(uint, uint)>((_x, _y));
+        public ValueTuple<(uint, uint)> Value => _value;
         public LFSR(int width, int height) 
         {
             _width = (uint)width;
@@ -30,12 +32,11 @@ namespace LFSR_SadConsole
         }
         public void Reset() 
         {
+            _randomValue = INIT_BYTE;
+            _cycles = default;
             _x = default;
             _y = default;
-            _cycles = 1;
-            _randomValue = 1;
         }
-
         public ValueTuple<(uint, uint)> Next()
         {
             SyncNext();
@@ -48,12 +49,12 @@ namespace LFSR_SadConsole
 
             return ValueTuple.Create<(uint, uint)>((_x, _y));
         }
-        ValueTuple<(uint, uint)> Shift()
+        private void Shift()
         {
-            // Y = low 8 bits
+            // Y = low 8 bits, 0 - 255 (i.e, 0000 0000 1111 1111)
             _y = (_randomValue & LOW_BYTE);
 
-            // X = high 9 bits
+            // X = high 9 bits, 0 - 511 (i.e, 0000 0001 1111 1111) ~ after shift (>> 8)
             _x = ((_randomValue & HIGH_BYTE) >> 8);
 
             // get output bit
@@ -66,9 +67,11 @@ namespace LFSR_SadConsole
             if (lsb != 0)
                 _randomValue ^= SOUP_BYTE;
 
-            return ValueTuple.Create<(uint, uint)>((_x, _y));
+            _value = ValueTuple.Create<(uint, uint)>((_x, _y));
+
+            return;
         }
-        void SyncNext()
+        private void SyncNext()
         {
             uint i = default;
 
@@ -91,7 +94,7 @@ namespace LFSR_SadConsole
                 }
             }
         }
-        async Task AsyncNext() 
+        private async Task AsyncNext() 
         {
             uint i = default;
 
@@ -115,8 +118,6 @@ namespace LFSR_SadConsole
             }
 
             await Task.CompletedTask;
-        }
-
-        
+        }      
     }
 }
