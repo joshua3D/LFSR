@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LFSR_SadConsole
@@ -23,7 +22,7 @@ namespace LFSR_SadConsole
         private readonly uint _dimension;
 
         public bool Finished => _cycles >= _dimension;
-        public ValueTuple<(uint, uint)> Value => _value;
+        public (uint, uint) Value => _value.Item1;
         public LFSR(int width, int height) 
         {
             _width = (uint)width;

@@ -10,9 +10,7 @@ namespace LFSR_SadConsole
         public const int Height = 20;
 
         private static LFSR _lfsr;
-
         private static Console _gameConsole;
-
         private static Random _random = new Random();
 
         static void Main(string[] args)
@@ -29,12 +27,11 @@ namespace LFSR_SadConsole
             SadConsole.Game.Instance.Run();
             SadConsole.Game.Instance.Dispose();
         }
-
         private static void Update(GameTime gameTime) 
         {
             if (!_lfsr.Finished)
             {
-                (uint, uint) coordinate = _lfsr.Value.Item1;
+                (uint, uint) coordinate = _lfsr.Value;
 
                 int x = (int)coordinate.Item1;
                 int y = (int)coordinate.Item2;
@@ -58,7 +55,6 @@ namespace LFSR_SadConsole
                 _gameConsole.Print(0, 0, "Finished!", Color.White, Color.Blue);
             }
         }
-
         private static void Init() 
         {
             _lfsr = new LFSR(Width, Height);
