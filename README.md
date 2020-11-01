@@ -26,11 +26,11 @@ Coords nextCoordinate = lfsr.Value;
 ## Why use FizzleFade and not an RNG?
 
 1. Every coordinate is generated only once by the algorithm
-2. Every coordinate generated is stored in a struct, 'Coords'
-2. Every coordinate is distributed evenly across the domain
+2. Every coordinate generated replaces the old one, and is stored in a struct, 'Coords'
+2. Every coordinate is distributed evenly across the domain of possible values
 3. The algorithm is 100% deterministic
 4. No collection is used (e.g., no lists, arrays, or hashmaps)
-6. Resetting the LFSR has little to no overhead
+6. Resetting the LFSR has very little overhead
 
 ## Where did the FizzleFade come from?
 [To learn more, I recommend this wonderful article on the use of FizzleFade in Wolfenstein3D](https://fabiensanglard.net/fizzlefade/index.php)
