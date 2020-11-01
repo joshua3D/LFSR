@@ -1,11 +1,12 @@
 # LFSR
  17-bit Linear Feedback Shift Register in C#
 
-# How To Use in SadConsole
-**A 17-bit LFSR is limited to 0-511 values on one axis, and 0-255 on the other**
-**This implementation assigns 0-511 to the X, and 0-255 to the y**
+## How To Use in SadConsole
+**A 17-bit LFSR is limited to 0-511 values on one axis, and 0-255 on the other.**
 
-```cs
+**This implementation assigns 0-511 to the X-Axis, and 0-255 to the Y-Axis**
+
+```
 SadConsole.Console console = new SadConsole.Console(width, height);
 
 LFSR lfsr = new LFSR(console.Width, console.Height);
