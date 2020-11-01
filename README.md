@@ -19,6 +19,12 @@ lfsr.Next();
 
 // we don't create and get in the same step, to avoid confusion
 Coords nextCoordinate = lfsr.Value;
+
+// we know the LFSR has generated every possible value for our domain when Finished returns true
+if(lfsr.Finished) 
+{
+ // OnFinish();
+}
 ```
 
 [A demonstration of the LFSR generating 1,200 cells](https://youtu.be/77TmBRx6myM)
