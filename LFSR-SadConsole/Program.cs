@@ -2,7 +2,7 @@
 using System;
 using Console = SadConsole.Console;
 
-namespace LFSR_SadConsole
+namespace NetLFSR
 {
     class Program
     {
@@ -31,10 +31,10 @@ namespace LFSR_SadConsole
         {
             if (!_lfsr.Finished)
             {
-                (uint, uint) coordinate = _lfsr.Value;
+                Coords coordinate = _lfsr.Coordinate;
 
-                int x = (int)coordinate.Item1;
-                int y = (int)coordinate.Item2;
+                int x = (int)coordinate.X;
+                int y = (int)coordinate.Y;
 
                 byte r = (byte)_random.Next(25, 256);
                 byte g = (byte)_random.Next(25, 256);

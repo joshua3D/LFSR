@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace LFSR_SadConsole
+namespace NetLFSR
 {
     public class LFSR
     {
@@ -15,14 +15,14 @@ namespace LFSR_SadConsole
         private uint _cycles = default;
         private uint _x = default;
         private uint _y = default;
-        private ValueTuple<(uint, uint)> _value;
+        private Coords _coordinate;
 
         private readonly uint _width;
         private readonly uint _height;
         private readonly uint _dimension;
 
         public bool Finished => _cycles >= _dimension;
-        public (uint, uint) Value => _value.Item1;
+        public Coords Coordinate => _coordinate;
         public LFSR(int width, int height) 
         {
             _width = (uint)width;
@@ -102,7 +102,9 @@ namespace LFSR_SadConsole
             if (lsb != 0)
                 _randomValue ^= SOUP_BYTE;
 
-            _value = ValueTuple.Create<(uint, uint)>((_x, _y));
+            _coordinate = default;
+            _coordinate.X = _x;
+            _coordinate.Y = _y;
 
             return;
         }
